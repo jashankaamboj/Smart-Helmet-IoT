@@ -1,0 +1,99 @@
+Blynk App Integration for IoT-Based Smart Helmet
+
+Overview
+
+Blynk is an IoT platform that allows real-time monitoring and control of your IoT devices using a mobile app. This guide will explain how to integrate the Blynk app with the smart helmet project to display sensor data, send alerts, and enable remote monitoring.
+
+Prerequisites
+
+Blynk App: Download and install the Blynk app from the Play Store or App Store.
+
+Blynk Account: Create an account on Blynk.
+
+Blynk Libraries: Install the required Blynk libraries in the Arduino IDE.
+
+ESP32 Board Setup: Ensure your ESP32 is configured properly in Arduino IDE.
+
+Wi-Fi Credentials: Keep your Wi-Fi SSID and password ready.
+
+Steps to Integrate Blynk
+
+1. Setting Up Blynk App
+
+Open the Blynk app and create a new project.
+
+Choose ESP32 as the hardware and Wi-Fi as the connection type.
+
+An Auth Token will be sent to your registered email. Save this for later.
+
+Add widgets to the app:
+
+Label or Value Display for temperature, humidity, and gas levels.
+
+LED Widget for alert notifications.
+
+Button Widget to trigger emergency SOS alerts.
+
+2. Installing Blynk Library
+
+Open Arduino IDE and go to Sketch > Include Library > Manage Libraries.
+
+Search for Blynk and install the latest version.
+
+Also, ensure you have installed WiFi.h and BlynkSimpleEsp32.h.
+
+3. Connecting ESP32 to Blynk
+
+Open the Transmitter.ino file in Arduino IDE.
+
+Modify the code to include your Auth Token, Wi-Fi SSID, and Password:
+
+#define BLYNK_PRINT Serial
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+
+char auth[] = "YOUR_AUTH_TOKEN";
+char ssid[] = "YOUR_WIFI_SSID";
+char pass[] = "YOUR_WIFI_PASSWORD";
+
+void setup() {
+  Serial.begin(115200);
+  Blynk.begin(auth, ssid, pass);
+}
+
+void loop() {
+  Blynk.run();
+}
+
+Upload this code to your ESP32 and open the Serial Monitor to check if the device is connected.
+
+4. Sending Sensor Data to Blynk
+
+Use virtual pins to send sensor data to the Blynk app.
+
+Example code to send temperature data:
+
+Blynk.virtualWrite(V0, temperatureValue);
+
+Assign widgets in the Blynk app to the respective virtual pins.
+
+5. Setting Up Alerts
+
+Configure the Blynk app to send notifications when a threshold is exceeded.
+
+Example code to trigger an alert:
+
+if (gasLevel > threshold) {
+    Blynk.notify("Warning! Gas levels high!");
+}
+
+6. Testing the System
+
+Run the project and monitor the data in real time on the Blynk app.
+
+Adjust sensor values and ensure the alerts and controls function properly.
+
+Conclusion
+
+With Blynk integration, the smart helmet can provide real-time monitoring and alerts for hazardous conditions in coal mines. This setup enables workers and supervisors to receive instant updates, improving overall safety and response time.
+
