@@ -1,0 +1,22 @@
+# Required Libraries for IoT-Based Smart Helmet
+
+## Core Libraries
+- `WiFi.h` – Enables ESP32 to connect to the internet for Blynk IoT cloud integration.
+- `ESPNow.h` – Used for ESP-NOW wireless communication between ESP32 modules.
+- `BlynkSimpleEsp32.h` – Allows the ESP32 to communicate with the Blynk IoT Cloud.
+
+## Sensor-Specific Libraries
+- `DHT.h` – Library for reading temperature & humidity data from the **DHT11** sensor.
+- `MQ2.h` – Required for gas detection using the **MQ-2** sensor.
+- `IRremote.h` – Used for IR sensor-based helmet compliance and obstacle detection.
+
+## Additional Utilities
+- `ArduinoJson.h` – Useful for formatting data before sending it to the cloud (optional).
+- `EEPROM.h` – If small amounts of sensor data need to be stored on ESP32.
+
+## Installation Guide
+1. Open **Arduino IDE**.
+2. Go to **Sketch → Include Library → Manage Libraries**.
+3. Search for each library name and click **Install**.
+
+These libraries will ensure smooth operation of your IoT-based Smart Helmet project.
